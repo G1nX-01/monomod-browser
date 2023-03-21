@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+      html {
+        font-family: 'Open Sans', sans-serif;
+      }
+      .button {
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.button:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    <title>MLB - Monomod Level Browser</title>
+  </head>
+  <body>
+      <center><h1>Monomod Level Browser - Post a level</h1></center>
+    <center>Bored? Go see <a href="all" target="_blank">other people's levels</a>!</center>
+    <br>
+    <center>
+      <div style="width: 200px">
+        <details>
+      <summary style="cursor: pointer;">Click the arrow to post your own level!</summary>
+          <br>
+      <form action="javascript:void(0)" onsubmit="ajaskhddhjska()">
+          <label for="title" maxlength="20">The title of your new masterpiece:</label><br>
+          <input type="text" id="title" required><br><br>
+          <label for="code">Insert a playable Monomod code below:</label><br>
+          <small id="characterindicator">0</small>
+          <center>
+            <textarea name="Text1" id="code" cols="40" rows="5" maxlength="600" required></textarea>
+          </center>
+      <br><br>
+            <input type="checkbox" id="isvanilla"> <small>Vanilla level (without any monomod features in it)</small>
+           <br><br>
+          <input type="checkbox" id="rules" required> <small>By checking this, you agree to the <a href="rules" target="_blank">rules</a>.</small>
+            <br><br>
+          <center><input type="submit" value="Submit" id="submit"></center>
+       </form>
+</center> 
+    </div>
+    </details>
+  <script>
+    function ajaskhddhjska() {
+     var shit = (async () => {
+  const fuck = await fetch("/doesthatevenexist/" + document.getElementById("title").value)
+  var content = await fuck.json();
+  console.log(content)
+    var newdata = JSON.parse(JSON.stringify(content))
+    var doesitexistalready = newdata.result
+  console.log(doesitexistalready);
+       if (doesitexistalready) {
+               Toastify({
+
+text: "I'm afraid that level already exists. Please try a different name and code.",
+
+duration: 3000
+
+}).showToast(); 
+         return
+       }
+       })();
+      var title = document.getElementById('title').value
+     var code = document.getElementById('code').value
+     var isvanilla = document.getElementById('isvanilla').value
+
+    const data = {code, title}
+
+    const handleFormData = (async () => {
+  const rawResponse = await fetch('https://monomodbrowser.genarunchisacoa.repl.co/newcodething', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({title: title, code: code, isvanilla: isvanilla})
+  });
+  const content = await rawResponse.json();
+
+  console.log(content);
+      Toastify({
+
+text: 'Level "' + title + '" submitted successfully! Go to /all to see it!',
+
+duration: 3000
+
+}).showToast();
+})();
+  }
+    document.getElementById("submit").disabled = true;
+    var timer;
+$("#code").on("keydown input", function(){
+    var self = this;
+    clearTimeout(timer)
+    // prevent event from happening twice
+    timer = setTimeout(function(){
+        document.getElementById('characterindicator').innerHTML = document.getElementById('code').value.length
+     console.log("starts with K3:", document.getElementById('code').value.startsWith("K3"))
+    console.log("title length:", document.getElementById('title').value.length)
+      if (document.getElementById('code').value.startsWith("K3") || document.getElementById('title').value.length >= 5) {
+        document.getElementById("submit").disabled = false;
+      } else {
+        document.getElementById("submit").disabled = true;
+      }
+    },0);
+});
+
+  </script>
+  </body>
+</html>
