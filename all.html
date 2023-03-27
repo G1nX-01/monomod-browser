@@ -53,6 +53,22 @@ tr:nth-child(even) {
   color: white;
 }
 
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar::-webkit-progress-bar {
+  background-color: #f2f2f2;
+}
+
+.progress-bar::-webkit-progress-value {
+  background-color: #4CAF50;
+  transition: width 0.5s ease-in-out;
+}
 
 </style>
 
@@ -70,7 +86,7 @@ tr:nth-child(even) {
   <div id="loadingdiv" class="center">
   <center>
   <h1 id="randmsg"></h1>
-  <progress id="myProgressBar"></progress>
+  <progress id="myProgressBar" max="100" value="0" class="progress-bar"></progress>
   </center>
   </div>
   <tr>
@@ -82,6 +98,13 @@ tr:nth-child(even) {
   </table>
 
 <script>
+const loadingmsg = ['Loading mover cells...', 'Loading ninjas...', 'Loading cats...', 'Loading something good...', 'Who made the internal API?'];
+
+    const randomIndex = Math.floor(Math.random() * loadingmsg.length);
+    const randomItem = loadingmsg[randomIndex];
+
+    console.log(randomItem)
+	document.getElementById('randmsg').innerHTML = randomItem
 
 function validateVanilla(text) {
   if (text == "off") { return "No" } else { return "Yes" }
@@ -90,47 +113,38 @@ function validateVanilla(text) {
 fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
   .then(response => response.json())
   .then(data => {
-    const loadingmsg = ['Loading mover cells...', 'Loading ninjas...', 'Loading cats...', 'Loading something good...', 'Who made the internal API?'];
-
-    const randomIndex = Math.floor(Math.random() * loadingmsg.length);
-    const randomItem = loadingmsg[randomIndex];
-
-    console.log(randomItem)
-	document.getElementById('randmsg').innerHTML = randomItem
-
-	// Get the nested data object
-    var nestedData = data.data;
-	var numItems = Object.keys(nestedData).length;
-    console.log(`Number of items: ${numItems}`);
-    // Get the table element by ID
-    var table = document.getElementById('myTable');
-	var progressBar = document.getElementById('myProgressBar');
-    var processedItems = 0;
-
-    // Loop through the object and populate the table
-    for (const key in nestedData) {
+    const nestedData = data.data;
+    const numItems = Object.keys(nestedData).length; // count the total number of items
+    const table = document.getElementById("myTable");
+    const progressBar = document.getElementById("myProgressBar");
+    let processedItems = 0;
+	
+    for (let key in nestedData) {
       if (nestedData.hasOwnProperty(key)) {
-        var item = nestedData[key];
-        var row = table.insertRow();
-        var nameCell = row.insertCell(0);
-        var valueCell = row.insertCell(1);
-        var dateCell = row.insertCell(-1);
-        var vanillaCell = row.insertCell(2);
-        var vanillaReal = validateVanilla(item.isvanilla)
-        
+        let item = nestedData[key];
+        let row = table.insertRow();
+        let nameCell = row.insertCell(0);
+        let valueCell = row.insertCell(1);
+        let dateCell = row.insertCell(-1);
+        let vanillaCell = row.insertCell(2);
+        let vanillaReal = validateVanilla(item.isvanilla)
         nameCell.innerHTML = item.head;
         valueCell.innerHTML = '<button onclick="' + "copyshit('" + item.val + "'," + "'" + item.head + "')" + '" style="cursor: pointer;" class="copyme">Copy</button>';
         dateCell.innerHTML = item.date;
         vanillaCell.innerHTML = vanillaReal;
-		processedItems++;
-        var progress = Math.floor(processedItems / numItems * 100);
+        processedItems++;
+        let progress = Math.floor(processedItems / numItems * 100);
         progressBar.value = progress;
+        console.log(progress.toString(), "%");
       }
     }
+    setTimeout(function() {
+      $("#loadingdiv").hide()
+      $("#myTable").show() // show table when parsing is complete
+    }, 0);
   })
   .catch(error => console.error(error));
-  $("#loadingdiv").hide()
-  $("#myTable").show()
+  
 function copyshit(shit, title) {
   navigator.clipboard.writeText(shit);
   Toastify({
