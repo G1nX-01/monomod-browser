@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
@@ -8,7 +6,29 @@
 <script src="https://chancejs.com/chance.min.js"></script>
 <title>MLB - All Levels</title>
  <style>
-      html {
+ @keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.header {  
+  /* This section calls the slideInFromLeft animation we defined above */
+  animation: 1.3s ease-out 0s 1 slideInFromLeft;
+  
+  padding: 30px;
+}
+ .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+	  html {
         font-family: 'Open Sans', sans-serif;
       }
 .copyme {
@@ -72,6 +92,7 @@ tr:nth-child(even) {
 
 </style>
 
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -82,7 +103,7 @@ tr:nth-child(even) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
-  <table id="myTable" border="0" class="center" style="display: none;">
+  <center><table id="myTable" border="0" style="display: none;" class="center header"></center>
   <div id="loadingdiv" class="center">
   <center>
   <h1 id="randmsg"></h1>
