@@ -163,7 +163,7 @@ fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
         let vanillaReal = validateVanilla(item.isvanilla)
         if (item.banned == null) {
 		nameCell.innerHTML = item.head;
-		valueCell.innerHTML = '<center><button onclick="' + "copyshit('" + item.val + "'," + "'" + item.head + "')" + '" style="cursor: pointer;" class="copyme">Copy</button></center>';
+		valueCell.innerHTML = '<center><button onclick="' + "copyshit(`" + item.val + "`, " + "`" + item.head + "`)" + '" style="cursor: pointer;" class="copyme">Copy</button></center>';
         dateCell.innerHTML = item.date;
         vanillaCell.innerHTML = vanillaReal;
 		} else {
