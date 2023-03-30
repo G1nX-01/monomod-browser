@@ -149,10 +149,19 @@ fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
         let dateCell = row.insertCell(-1);
         let vanillaCell = row.insertCell(2);
         let vanillaReal = validateVanilla(item.isvanilla)
-        nameCell.innerHTML = item.head;
-        valueCell.innerHTML = '<button onclick="' + "copyshit('" + item.val + "'," + "'" + item.head + "')" + '" style="cursor: pointer;" class="copyme">Copy</button>';
+        if (item.banned == null) {
+		nameCell.innerHTML = item.head;
+		valueCell.innerHTML = '<center><button onclick="' + "copyshit('" + item.val + "'," + "'" + item.head + "')" + '" style="cursor: pointer;" class="copyme">Copy</button></center>';
         dateCell.innerHTML = item.date;
         vanillaCell.innerHTML = vanillaReal;
+		} else {
+		nameCell.innerHTML = "--BANNED--"
+		var banReason = item.banned.split(".").join(".<br>");
+		banReason = item.banned.split(",").join(",<br>");
+		valueCell.innerHTML = "This level was banned.<br>Reason: " + banReason
+		dateCell.innerHTML = "-";
+        vanillaCell.innerHTML = "-";
+		}
         processedItems++;
         let progress = Math.floor(processedItems / numItems * 100);
         progressBar.value = progress;
