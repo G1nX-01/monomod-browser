@@ -102,6 +102,17 @@ tr:nth-child(even) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+  
+  <div id="errorhandler" style="display: none;" class="header">
+  <center>
+  <h1>Oops.</h1>
+  <p>Looks like we ran into an error, didn't we?</p>
+  <p>It's alright, it's probably server-side issues.</p>
+  <p>Should be solved soon enough.</p>
+  <p>Here's the error. You can notify this on our <a href="https://discord.gg/jC3p7PxxU5">Discord Server</a>.</p>
+  <small id="erroutput"></small>
+  </center>
+  </div>
 
   <center><table id="myTable" border="0" style="display: none;" class="center header"></center>
   <div id="loadingdiv" class="center">
@@ -131,6 +142,8 @@ function validateVanilla(text) {
   if (text == "off") { return "No" } else { return "Yes" }
 }
 
+var progressBar = document.getElementById("myProgressBar");
+
 fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
   .then(response => response.json())
   .then(data => {
@@ -139,7 +152,6 @@ fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
     const table = document.getElementById("myTable");
     const progressBar = document.getElementById("myProgressBar");
     let processedItems = 0;
-	
     for (let key in nestedData) {
       if (nestedData.hasOwnProperty(key)) {
         let item = nestedData[key];
@@ -163,7 +175,7 @@ fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
         vanillaCell.innerHTML = "-";
 		}
         processedItems++;
-        let progress = Math.floor(processedItems / numItems * 100);
+		let progress = Math.floor(processedItems / numItems * 100);
         progressBar.value = progress;
         console.log(progress.toString(), "%");
       }
@@ -173,7 +185,11 @@ fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
       $("#myTable").show() // show table when parsing is complete
     }, 0);
   })
-  .catch(error => console.error(error));
+  .catch(error => function() {
+  document.getElementById("erroutput").innerHTML = error
+  $("#loadingdiv").hide()
+  $("#errorhandler").show()
+  });
   
 function copyshit(shit, title) {
   navigator.clipboard.writeText(shit);

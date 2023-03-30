@@ -122,7 +122,7 @@ footer {
     </details>
 <footer>
 <p>Website and internal API by G1nX-01 | Icon and CelLua Monomod by monochromeninja | CelLua Machine by KyyYay | Original Cell Machine by Sam Hogan</p>
-<p>Hey, pssst, why don't you take a look at our <a href="https://discord.gg/jC3p7PxxU5">discord server</a>?</p>
+<p>Hey, pssst, why don't you take a look at our <a href="https://discord.gg/jC3p7PxxU5">Discord Server</a>?</p>
 </footer>
   <script>
     function isValidZlib(b64) {
@@ -194,12 +194,16 @@ duration: 3000
 });
 	
 	}
+	
+	function validateVanilla(str) {
+       if (str) { return "on" } else { return "off" }
+	}
 	function ajaskhddhjska() {
-
+console.log(validateVanilla(document.getElementById("isvanilla").checked))
 $.ajax({
   type: "POST",
   url: "https://monomodbrowser.genarunchisacoa.repl.co/newcodething",
-  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: document.getElementById("isvanilla").value}),
+  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked)}),
   contentType: "application/json",
   success: function(data) {
     Toastify({
