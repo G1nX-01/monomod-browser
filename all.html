@@ -125,6 +125,7 @@ tr:nth-child(even) {
     <th>Title</th>
     <th>Level Code</th>
     <th>Is Vanilla?</th>
+	<th>ID</th>
     <th>Date</th>
   </tr>
   </table>
@@ -143,46 +144,138 @@ function validateVanilla(text) {
 }
 
 var progressBar = document.getElementById("myProgressBar");
+function getKeysAndValues(obj) {
+  let result = [];
+  for (let key in obj) {
+    const value = obj[key];
+    let entry = {
+      key: key,
+      value: value
+    };
+    if (typeof value === "object") {
+      entry.children = getKeysAndValues(value);
+    }
+    result.push(entry);
+  }
+  return result.sort((a, b) => a.key - b.key);
+}
 
 fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
   .then(response => response.json())
   .then(data => {
-    const nestedData = data.data;
-    const numItems = Object.keys(nestedData).length; // count the total number of items
-    const table = document.getElementById("myTable");
-    const progressBar = document.getElementById("myProgressBar");
-    let processedItems = 0;
-    for (let key in nestedData) {
-      if (nestedData.hasOwnProperty(key)) {
-        let item = nestedData[key];
-        let row = table.insertRow();
-        let nameCell = row.insertCell(0);
-        let valueCell = row.insertCell(1);
-        let dateCell = row.insertCell(-1);
-        let vanillaCell = row.insertCell(2);
-        let vanillaReal = validateVanilla(item.isvanilla)
-        if (item.banned == null) {
-		nameCell.innerHTML = item.head;
-		valueCell.innerHTML = '<center><button onclick="' + "copyshit(`" + item.val + "`, " + "`" + item.head + "`)" + '" style="cursor: pointer;" class="copyme">Copy</button></center>';
-        dateCell.innerHTML = item.date;
-        vanillaCell.innerHTML = vanillaReal;
-		} else {
-		nameCell.innerHTML = "--BANNED--"
-		var banReason = item.banned.split(".").join(".<br>");
-		banReason = item.banned.split(",").join(",<br>");
-		valueCell.innerHTML = "This level was banned.<br>Reason: " + banReason
-		dateCell.innerHTML = "-";
-        vanillaCell.innerHTML = "-";
-		}
-        processedItems++;
-		let progress = Math.floor(processedItems / numItems * 100);
-        progressBar.value = progress;
-        console.log(progress.toString(), "%");
-      }
+const nestedData = data.data;
+const ids = data.ids;
+const numItems = Object.keys(nestedData).length;
+const numIds = Object.keys(ids).length;
+const table = document.getElementById("myTable");
+const progressBar = document.getElementById("myProgressBar");
+let processedItems = 0;
+var hmm = null;
+
+function logValues(obj) {
+  for (let key in obj) {
+    const value = obj[key];
+    if (typeof value === "object") {
+      logValues(value);
+    } else {
+      console.log(value);
     }
-    setTimeout(function() {
-      $("#loadingdiv").hide()
-      $("#myTable").show() // show table when parsing is complete
+  }
+}
+
+function logKeys(obj) {
+  for (let key in obj) {
+    console.log(key);
+    if (typeof obj[key] === "object") {
+      logKeys(obj[key]);
+    }
+  }
+}
+logKeys(ids);
+logValues(ids);
+
+function getKeysAndValues(obj) {
+  let result = [];
+  for (let key in obj) {
+    const value = obj[key];
+    let entry = {
+      key: key,
+      value: value
+    };
+    if (typeof value === "object") {
+      entry.children = getKeysAndValues(value);
+    }
+    result.push(entry);
+  }
+  return result;
+}
+
+var idx = 0;
+var arr = getKeysAndValues(ids);
+console.log(arr)
+
+// reorder items based on their ids
+let sortedData = {};
+for (let i = 0; i < arr.length; i++) {
+  const id = arr[i].key;
+  if (nestedData[id]) {
+    sortedData[id] = nestedData[id];
+    delete nestedData[id];
+  }
+}
+sortedData = Object.assign(sortedData, nestedData);
+
+for (let key in sortedData) {
+  if (sortedData.hasOwnProperty(key)) {
+    let item = sortedData[key];
+    let row = table.insertRow();
+    let nameCell = row.insertCell(0);
+    let valueCell = row.insertCell(1);
+    let dateCell = row.insertCell(-1);
+    let vanillaCell = row.insertCell(2);
+	let idCell = row.insertCell(3);
+    let vanillaReal = validateVanilla(item.isvanilla);
+
+    if (item.banned == null) {
+      let itemId = arr.find((el) => el.value === item.head)?.key || "";
+	  idCell.innerHTML = itemId
+      nameCell.innerHTML =
+        '<a href="/monomodbrowser/level?id=' +
+        itemId +
+        '">' +
+        item.head +
+        "</a>";
+      valueCell.innerHTML =
+        '<center><button onclick="' +
+        "copyshit(`" +
+        item.val +
+        "`, " +
+        "`" +
+        item.head +
+        "`)" +
+        '" style="cursor: pointer;" class="copyme">Copy</button></center>';
+      dateCell.innerHTML = item.date;
+      vanillaCell.innerHTML = vanillaReal;
+    } else {
+      nameCell.innerHTML = "--BANNED--";
+	  idCell.innerHTML = "-"
+      var banReason = item.banned.split(".").join(".<br>");
+      banReason = item.banned.split(",").join(",<br>");
+      valueCell.innerHTML =
+        "This level was banned.<br>Reason: " + banReason;
+      dateCell.innerHTML = "-";
+      vanillaCell.innerHTML = "-";
+    }
+    processedItems++;
+    let progress = Math.floor((processedItems / numItems) * 100);
+    progressBar.value = progress;
+    console.log(progress.toString(), "%");
+  }
+}
+
+    setTimeout(function () {
+      $("#loadingdiv").hide();
+      $("#myTable").show(); // show table when parsing is complete
     }, 0);
   })
   .catch(error => function() {

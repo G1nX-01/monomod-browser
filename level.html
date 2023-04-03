@@ -1,0 +1,218 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://chancejs.com/chance.min.js"></script>
+<link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<title>MLB - Loading...</title>
+<style>
+ @keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.header {  
+  /* This section calls the slideInFromLeft animation we defined above */
+  animation: 1.3s ease-out 0s 1 slideInFromLeft;
+  
+  padding: 30px;
+}
+	  html {
+        font-family: 'Open Sans', sans-serif;
+      }
+.button {
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.button:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+        
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 1px solid #c9bdbd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #8f8989;
+  color: white;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar::-webkit-progress-bar {
+  background-color: #f2f2f2;
+}
+
+.progress-bar::-webkit-progress-value {
+  background-color: #4CAF50;
+  transition: width 0.5s ease-in-out;
+}
+
+.outer {
+       border: 3px dashed #999;
+	   padding: 10px;
+       }
+
+</style>
+<div id="ui" class="center outer">
+<h1 id="title">Loading title...</h1>
+<center>
+<button class="button" style="display: none;" id="copyme">Copy</button>
+<br><br>
+<small id="views">Loading views...</small>
+<br>
+<small id="copies"></small>
+</center>
+</div>
+<div id="error" class="center" style="display: none;">
+<center>
+<h1>Who took you here?</h1>
+<p>This level was banned or it just doesn't exist.</p>
+<p>This could also have happened because of another error.</p>
+<p>In any case, here's the error:</p>
+<p><i id="errcode"></i></p>
+<button id="cat" onclick="activatecat()" class="button" style="cursor: pointer">Cat Mode</button>
+<a href="/monomodbrowser/"><button class="button" style="cursor: pointer">Re-locate me</button></a>
+<br>
+<br>
+<image src="https://http.cat/404" height="450px" id="cat!" style="display: none;"></image>
+</center>
+</div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+<script>
+function activatecat() {
+  var x = document.getElementById("cat!");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+const queryString = window.location.search;
+console.log(queryString);
+const urlParams = new URLSearchParams(queryString);
+console.log(urlParams)
+const ID = urlParams.get('id')
+console.log(ID)
+//document.title = "MLB - " + urlParams.get('')
+$.ajax({
+  type: "POST",
+  url: "https://monomodbrowser.genarunchisacoa.repl.co/viewlevel",
+  data: JSON.stringify({id: ID}),
+  contentType: "application/json",
+  success: function(data) {
+   data = data.data
+   console.log(data)
+   document.getElementById("title").innerHTML = data
+   document.title = "MLB - " + data
+   fetch('https://monomodbrowser.genarunchisacoa.repl.co/listspecific/' + data)
+  .then(response => response.json())
+  .then(data => {
+  console.log(data)
+  var element = document.getElementById("copyme")
+  element.addEventListener("click", function() {
+    navigator.clipboard.writeText(data.data.val);
+  fetch('https://api.countapi.xyz/hit/MLB-copies/' + ID)
+  .then(response => response.json())
+  .then(data => {
+  data = data.value
+  console.log(data)
+  document.getElementById("copies").innerHTML = data + " copies"
+  })
+  .catch(error => console.error(error));
+  Toastify({
+
+text: 'Copied "' + document.getElementById("title").innerHTML + '" to the clipboard!',
+
+duration: 3000
+
+}).showToast();
+});
+  $("#copyme").show();
+  })
+  .catch(error => console.error(error))
+   doView(ID)
+  },
+  error: function(xhr, status, error) {
+    var err = eval("(" + xhr.responseText + ")");
+	var errcode = eval("(" + xhr.status + ")");
+	$("#ui").hide();
+	console.error(err)
+	document.getElementById("errcode").innerHTML = errcode + " - " + err.error
+	$("#error").show();
+	document.title = "What"
+	document.getElementById("cat!").src = "https://http.cat/" + errcode
+  }
+});
+
+function doView(str) {
+fetch('https://api.countapi.xyz/hit/MLB/' + str)
+  .then(response => response.json())
+  .then(data => {
+  data = data.value
+  console.log(data)
+  document.getElementById("views").innerHTML = data + " views"
+  })
+  .catch(error => console.error(error));
+}
+
+function copyshit(shit, title) {
+  navigator.clipboard.writeText(shit);
+  Toastify({
+
+text: 'Copied "' + title + '" to the clipboard!',
+
+duration: 3000
+
+}).showToast();
+}
+</script>
+
+<!--<div id="comments">
+<h1>Comments about this level (BETA)</h1>
+<div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>commentBox('5638535449149440-proj')</script>
+</div>-->
