@@ -6,6 +6,26 @@
 <script src="https://chancejs.com/chance.min.js"></script>
 <title>MLB - All Levels</title>
  <style>
+ @keyframes move-background {
+  from {
+    background-position: 100% 0; /* starting position */
+  }
+  to {
+    background-position: 0 0; /* ending position */
+  }
+}
+	  html {
+        font-family: 'Open Sans', sans-serif;
+		  background: #202020;
+		  background-size: 50px 50px;
+		  background-image: url("bg.png");
+            background-repeat: repeat;
+			color: white;
+          animation: move-background 60s linear infinite;
+      }
+	  a {
+	  color: DarkSalmon;
+	  }
  @keyframes slideInFromLeft {
   0% {
     transform: translateX(-100%);
@@ -28,9 +48,6 @@
   text-align: center;
   min-height: 100vh;
 }
-	  html {
-        font-family: 'Open Sans', sans-serif;
-      }
 .copyme {
 	box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
@@ -69,9 +86,13 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #8f8989;
+  background-color: #4f4241;
   color: white;
 }
+/*tr:nth-child(odd) {
+  background-color: #424242;
+  color: white;
+}*/
 
 .progress-bar {
   width: 100%;

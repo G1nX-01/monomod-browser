@@ -4,9 +4,26 @@
 <link href="https://theretrosimulatorstimulator.neocities.org/center.css">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <style>
-  html {
+@keyframes move-background {
+  from {
+    background-position: 100% 0; /* starting position */
+  }
+  to {
+    background-position: 0 0; /* ending position */
+  }
+}
+	  html {
         font-family: 'Open Sans', sans-serif;
+		  background: #202020;
+		  background-size: 50px 50px;
+		  background-image: url("bg.png");
+            background-repeat: repeat;
+			color: white;
+          animation: move-background 60s linear infinite;
       }
+	  a {
+	  color: DarkSalmon;
+	  }
  .center {
   margin: 0;
   position: absolute;

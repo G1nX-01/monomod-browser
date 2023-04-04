@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
@@ -16,9 +16,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-      html {
+     
+@keyframes move-background {
+  from {
+    background-position: 100% 0; /* starting position */
+  }
+  to {
+    background-position: 0 0; /* ending position */
+  }
+}
+	  html {
         font-family: 'Open Sans', sans-serif;
+		  background: #202020;
+		  background-size: 50px 50px;
+		  background-image: url("bg.png");
+            background-repeat: repeat;
+			color: white;
+          animation: move-background 60s linear infinite;
       }
+	  a {
+	  color: DarkSalmon;
+	  }
       .button {
 	box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
@@ -45,7 +63,7 @@
 
 header {
   padding: 3px;
-  background-color: DarkSalmon;
+  background-color: grey;
   color: white;
   up: 100%;
   bottom: 0;
@@ -81,7 +99,6 @@ header {
   text-decoration: none;
 }
     </style>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	
 	<script src="https://cdn.jsdelivr.net/gh/nodeca/pako@master/dist/pako.js"></script>
 	

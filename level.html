@@ -16,16 +16,33 @@
     transform: translateX(0);
   }
 }
-
+@keyframes move-background {
+  from {
+    background-position: 100% 0; /* starting position */
+  }
+  to {
+    background-position: 0 0; /* ending position */
+  }
+}
+	  html {
+        font-family: 'Open Sans', sans-serif;
+		  background: #202020;
+		  background-size: 50px 50px;
+		  background-image: url("bg.png");
+            background-repeat: repeat;
+			color: white;
+          animation: move-background 60s linear infinite;
+      }
+	  a {
+	  color: DarkSalmon;
+	  }
 .header {  
   /* This section calls the slideInFromLeft animation we defined above */
   animation: 1.3s ease-out 0s 1 slideInFromLeft;
   
   padding: 30px;
 }
-	  html {
-        font-family: 'Open Sans', sans-serif;
-      }
+
 .button {
 	box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
