@@ -152,6 +152,8 @@ tr:nth-child(even) {
     <th>Level Code</th>
     <th>Is Vanilla?</th>
 	<th>ID</th>
+	<th>Views</th>
+	<th>Copies</th>
     <th>Date</th>
   </tr>
   </table>
@@ -189,6 +191,36 @@ function getKeysAndValues(obj) {
 fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
   .then(response => response.json())
   .then(data => {
+async function processview(id) {
+	const response = await fetch(
+		'https://api.countapi.xyz/info/MLB/' + id,
+		{
+			method: 'GET'
+		}
+	);
+	if (!response.ok) {
+		return 0;
+	}
+	const data = await response.json();
+	console.log(data.value)
+	return data.value
+}
+
+async function processcopy(id) {
+	const response = await fetch(
+		'https://api.countapi.xyz/hit/MLB-copies/' + id,
+		{
+			method: 'GET'
+		}
+	);
+	if (!response.ok) {
+		return 0;
+	}
+	const data = await response.json();
+	console.log(data.value)
+	return data.value
+}
+
 const nestedData = data.data;
 const ids = data.ids;
 const numItems = Object.keys(nestedData).length;
@@ -260,7 +292,11 @@ for (let key in sortedData) {
     let dateCell = row.insertCell(-1);
     let vanillaCell = row.insertCell(2);
 	let idCell = row.insertCell(3);
+	let viewCell = row.insertCell(4);
     let vanillaReal = validateVanilla(item.isvanilla);
+	let copiesCell = row.insertCell(5);;
+	viewCell.innerHTML = "<center>Loading...</center>";
+	copiesCell.innerHTML = "<center>Loading...</center>";
 
     if (item.banned == null) {
       let itemId = arr.find((el) => el.value === item.head)?.key || "";
@@ -282,6 +318,8 @@ for (let key in sortedData) {
         '" style="cursor: pointer;" class="copyme">Copy</button></center>';
       dateCell.innerHTML = item.date;
       vanillaCell.innerHTML = vanillaReal;
+	  processview(itemId).then(x => {viewCell.innerHTML = "<center>" + x + "</center>";});
+	  processcopy(itemId).then(x => {copiesCell.innerHTML = "<center>" + x + "</center>";});
     } else {
       nameCell.innerHTML = "--BANNED--";
 	  idCell.innerHTML = "-"
@@ -291,6 +329,8 @@ for (let key in sortedData) {
         "This level was banned.<br>Reason: " + banReason;
       dateCell.innerHTML = "-";
       vanillaCell.innerHTML = "-";
+	  viewCell.innerHTML = "-";
+	  copiesCell.innerHTML = "-";
     }
     processedItems++;
     let progress = Math.floor((processedItems / numItems) * 100);
@@ -320,5 +360,4 @@ duration: 3000
 
 }).showToast();
 }
-
 </script>
