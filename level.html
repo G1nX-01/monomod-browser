@@ -160,7 +160,7 @@ console.log(ID)
 //document.title = "MLB - " + urlParams.get('')
 $.ajax({
   type: "POST",
-  url: "https://monomodbrowser.genarunchisacoa.repl.co/viewlevel",
+  url: "https://b3vk4s-3000.csb.app/viewlevel",
   data: JSON.stringify({id: ID}),
   contentType: "application/json",
   success: function(data) {
@@ -168,7 +168,7 @@ $.ajax({
    console.log(data)
    document.getElementById("title").innerHTML = data
    document.title = "MLB - " + data
-   fetch('https://monomodbrowser.genarunchisacoa.repl.co/listspecific/' + data)
+   fetch('https://b3vk4s-3000.csb.app/listspecific/' + data)
   .then(response => response.json())
   .then(data => {
   console.log(data)

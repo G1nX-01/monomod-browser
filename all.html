@@ -111,11 +111,6 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.progress-bar::-webkit-progress-value {
-  background-color: #4CAF50;
-  transition: width 0.5s ease-in-out;
-}
-
 </style>
 
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -144,6 +139,7 @@ tr:nth-child(even) {
   <div id="loadingdiv" class="center">
   <center>
   <h1 id="randmsg"></h1>
+  <small id="percent">0%<br></small>
   <progress id="myProgressBar" max="100" value="0" class="progress-bar"></progress>
   </center>
   </div>
@@ -188,7 +184,7 @@ function getKeysAndValues(obj) {
   return result.sort((a, b) => a.key - b.key);
 }
 
-fetch('https://monomodbrowser.genarunchisacoa.repl.co/listjson')
+fetch('https://b3vk4s-3000.csb.app/listjson')
   .then(response => response.json())
   .then(data => {
 async function processview(id) {
@@ -228,7 +224,11 @@ const numIds = Object.keys(ids).length;
 const table = document.getElementById("myTable");
 const progressBar = document.getElementById("myProgressBar");
 let processedItems = 0;
-var hmm = null;
+async function update(p) {
+    progressBar.value = p;
+    console.log(p.toString());
+	document.getElementById("percent").innerHTML = p + "%<br>"
+}
 
 function logValues(obj) {
   for (let key in obj) {
@@ -334,8 +334,7 @@ for (let key in sortedData) {
     }
     processedItems++;
     let progress = Math.floor((processedItems / numItems) * 100);
-    progressBar.value = progress;
-    console.log(progress.toString(), "%");
+    update(progress)
   }
 }
 
