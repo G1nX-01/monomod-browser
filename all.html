@@ -150,6 +150,7 @@ tr:nth-child(even) {
 	<th>ID</th>
 	<th>Views</th>
 	<th>Copies</th>
+	<th><center>QR Code</center></th>
     <th>Date</th>
   </tr>
   </table>
@@ -294,7 +295,8 @@ for (let key in sortedData) {
 	let idCell = row.insertCell(3);
 	let viewCell = row.insertCell(4);
     let vanillaReal = validateVanilla(item.isvanilla);
-	let copiesCell = row.insertCell(5);;
+	let copiesCell = row.insertCell(5);
+	let qrCell = row.insertCell(6);
 	viewCell.innerHTML = "<center>Loading...</center>";
 	copiesCell.innerHTML = "<center>Loading...</center>";
 
@@ -318,6 +320,7 @@ for (let key in sortedData) {
         '" style="cursor: pointer;" class="copyme">Copy</button></center>';
       dateCell.innerHTML = item.date;
       vanillaCell.innerHTML = vanillaReal;
+	  qrCell.innerHTML = '<image src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://g1nx-01.github.io/monomod-browser/level?id=' + itemId + '"></image>'
 	  processview(itemId).then(x => {viewCell.innerHTML = "<center>" + x + "</center>";});
 	  processcopy(itemId).then(x => {copiesCell.innerHTML = "<center>" + x + "</center>";});
     } else {
@@ -331,6 +334,7 @@ for (let key in sortedData) {
       vanillaCell.innerHTML = "-";
 	  viewCell.innerHTML = "-";
 	  copiesCell.innerHTML = "-";
+	  qrCell.innerHTML = "-";
     }
     processedItems++;
     let progress = Math.floor((processedItems / numItems) * 100);
