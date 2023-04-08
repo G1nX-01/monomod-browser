@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
 <header>
-<center><marquee direction="right" scrollamount="15"><p>Website and internal API by G1nX-01 | Icon and CelLua Monomod by monochromeninja | CelLua Machine by KyyYay | Original Cell Machine by Sam Hogan</p></marquee></center>
+<center><marquee direction="right" scrollamount="15"><p><a href="https://stats.uptimerobot.com/VWGMlt2GP6" target="_blank">NEW STATUS PAGE!</a> - Website and internal API by G1nX-01 | Icon and CelLua Monomod by monochromeninja | CelLua Machine by KyyYay | Original Cell Machine by Sam Hogan</p></marquee></center>
 <hr>
 <center><a href="https://discord.gg/jC3p7PxxU5"><img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-1-1.png" height="100px" title="JOIN OUR DISCORD!"></img></a></center>
 </header>
@@ -144,7 +144,15 @@ header {
     </div>
     </details>
   <script>
-    function isValidZlib(b64) {
+    function country() {
+     fetch('https://ipapi.co/json')
+    .then(response => response.json())
+    .then(data => {
+	console.log(data.country_code)
+	return data.country_code
+	});
+	}
+	function isValidZlib(b64) {
     let strData = atob(b64);
     let charData = strData.split("").map(x => x.charCodeAt(0));
     let binData = new Uint8Array(charData);
@@ -218,11 +226,12 @@ duration: 3000
        if (str) { return "on" } else { return "off" }
 	}
 	function ajaskhddhjska() {
+	var c = country()
 console.log(validateVanilla(document.getElementById("isvanilla").checked))
 $.ajax({
   type: "POST",
   url: "https://b3vk4s-3000.csb.app/newcodething",
-  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked)}),
+  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: c}),
   contentType: "application/json",
   success: function(data) {
     Toastify({
