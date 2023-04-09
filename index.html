@@ -144,14 +144,6 @@ header {
     </div>
     </details>
   <script>
-    function country() {
-     fetch('https://ipapi.co/json')
-    .then(response => response.json())
-    .then(data => {
-	console.log(data.country_code)
-	return data.country_code
-	});
-	}
 	function isValidZlib(b64) {
     let strData = atob(b64);
     let charData = strData.split("").map(x => x.charCodeAt(0));
@@ -226,12 +218,14 @@ duration: 3000
        if (str) { return "on" } else { return "off" }
 	}
 	function ajaskhddhjska() {
-	var c = country()
-console.log(validateVanilla(document.getElementById("isvanilla").checked))
-$.ajax({
+	 fetch('https://ipapi.co/json')
+    .then(response => response.json())
+    .then(data => {
+	console.log(JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: data.country_code}))
+	$.ajax({
   type: "POST",
   url: "https://b3vk4s-3000.csb.app/newcodething",
-  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: c}),
+  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: data.country_code}),
   contentType: "application/json",
   success: function(data) {
     Toastify({
@@ -249,6 +243,8 @@ duration: 3000
     console.error(jqXHR, textStatus, errorThrown)
   }
 });
+	});
+
 
 }
 

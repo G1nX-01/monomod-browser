@@ -144,20 +144,23 @@ tr:nth-child(even) {
   </center>
   </div>
   <tr>
-    <th>Title</th>
-    <th>Level Code</th>
-    <th>Is Vanilla?</th>
-	<th>ID</th>
-	<th>Views</th>
-	<th>Copies</th>
+    <th><center>Title</center></th>
+    <th><center>Level Code</center></th>
+    <th><center>Is Vanilla?</center></th>
+	<th><center>ID</center></th>
+	<th><center>Views</center></th>
+	<th><center>Copies</center></th>
 	<th><center>QR Code</center></th>
-    <th>Date</th>
+	<th><center>Country</center></th>
+    <th><center>Date</center></th>
   </tr>
   </table>
 
 <script>
 const loadingmsg = ['Loading mover cells...', 'Loading ninjas...', 'Loading cats...', 'Loading something good...', 'Who made the internal API?'];
-
+const regionNames = new Intl.DisplayNames(
+  ['en'], {type: 'region'}
+);
     const randomIndex = Math.floor(Math.random() * loadingmsg.length);
     const randomItem = loadingmsg[randomIndex];
 
@@ -312,6 +315,7 @@ for (let key in sortedData) {
     let vanillaReal = validateVanilla(item.isvanilla);
 	let copiesCell = row.insertCell(5);
 	let qrCell = row.insertCell(6);
+	let countryCell = row.insertCell(7);
 	viewCell.innerHTML = "<center>Loading...</center>";
 	copiesCell.innerHTML = "<center>Loading...</center>";
 
@@ -337,6 +341,7 @@ for (let key in sortedData) {
 	  qrCell.innerHTML = '<image src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://g1nx-01.github.io/monomod-browser/level?id=' + itemId + '"></image>'
 	  processview(itemId).then(x => {viewCell.innerHTML = "<center>" + x + "</center>";});
 	  processcopy(itemId).then(x => {copiesCell.innerHTML = "<center>" + x + "</center>";});
+	  countryCell.innerHTML = '<center><p>' + regionNames.of(item.country) + '</p><img src="https://flagsapi.com/' + item.country + '/shiny/64.png"></img></center>'
     } else {
       nameCell.innerHTML = "--BANNED--";
 	  idCell.innerHTML = "-"
@@ -349,6 +354,7 @@ for (let key in sortedData) {
 	  viewCell.innerHTML = "-";
 	  copiesCell.innerHTML = "-";
 	  qrCell.innerHTML = "-";
+	  countryCell.innerHTML = '-'
     }
     processedItems++;
     let progress = Math.floor((processedItems / numItems) * 100);
