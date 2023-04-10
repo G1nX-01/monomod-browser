@@ -337,12 +337,18 @@ for (let key in sortedData) {
         "`,)" +
         '" style="cursor: pointer;" class="copyme">Copy</button></center>';
       dateCell.innerHTML = item.date;
-      vanillaCell.innerHTML = vanillaReal;
+      vanillaCell.innerHTML = "<center>" + vanillaReal + "</center>";
 	  qrCell.innerHTML = '<image src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://g1nx-01.github.io/monomod-browser/level?id=' + itemId + '"></image>'
 	  processview(itemId).then(x => {viewCell.innerHTML = "<center>" + x + "</center>";});
 	  processcopy(itemId).then(x => {copiesCell.innerHTML = "<center>" + x + "</center>";});
+	  console.log(item.country)
+	  if (item.country != "nope") {
 	  countryCell.innerHTML = '<center><p>' + regionNames.of(item.country) + '</p><img src="https://flagsapi.com/' + item.country + '/shiny/64.png"></img></center>'
-    } else {
+      } else {
+	  countryCell.innerHTML = "<center><p>Anonymous</p></center>"
+	  }
+	
+	} else {
       nameCell.innerHTML = "--BANNED--";
 	  idCell.innerHTML = "-"
       var banReason = item.banned.split(".").join(".<br>");
