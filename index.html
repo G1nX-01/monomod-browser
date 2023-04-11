@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
 <header style="background-color: grey;">
 <center>
-<marquee direction="right" scrollamount="15"><p><a href="https://stats.uptimerobot.com/VWGMlt2GP6" target="_blank">NEW STATUS PAGE!</a> - Website and internal API by G1nX-01 | Icon, Logo and CelLua Monomod by monochromeninja | CelLua Machine by KyYay | Original Cell Machine by Sam Hogan</p></marquee>
+<marquee direction="right" scrollamount="15" behaviour="slide"><p><a href="https://stats.uptimerobot.com/VWGMlt2GP6" target="_blank">NEW STATUS PAGE!</a> - Website and internal API by G1nX-01 | Icon, Logo and CelLua Monomod by monochromeninja | CelLua Machine by KyYay | Original Cell Machine by Sam Hogan</p></marquee>
 <img src="logo.png" height="233px" id="logo"></img>
-<p id="splash" style="color: yellow;">Loading splash...</p>
+<p id="splash" style="color: yellow; width: 100%">Loading splash...</p>
+<p>The place of the holder</p>
 </center>
 <hr>
 <center><a href="https://discord.gg/jC3p7PxxU5"><img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-1-1.png" height="100px" title="JOIN OUR DISCORD!"></img></a></center>
@@ -169,6 +170,49 @@ header {
   90%{color: DodgerBlue;}
 	100%{color: orange;}
 }
+
+.blink {
+                animation: blinker 1.5s linear infinite;
+            }
+            @keyframes blinker {
+                50% {
+                    opacity: 0;
+                }
+            }
+   .glitch {
+        color: #fff;
+        text-shadow: -1px 0 #00ff00, 0 1px #00ff00, 1px 0 #00ff00, 0 -1px #00ff00;
+        animation: glitch 1s infinite;
+      }
+      
+      @keyframes glitch {
+        0% {
+          text-shadow: -1px 0 #ff0000, 0 1px #ff0000, 1px 0 #ff0000, 0 -1px #ff0000;
+        }
+        25% {
+          text-shadow: -1px 0 #00ff00, 0 1px #00ff00, 1px 0 #00ff00, 0 -1px #00ff00;
+        }
+        50% {
+          text-shadow: -1px 0 #0000ff, 0 1px #0000ff, 1px 0 #0000ff, 0 -1px #0000ff;
+        }
+        75% {
+          text-shadow: -1px 0 #ffff00, 0 1px #ffff00, 1px 0 #ffff00, 0 -1px #ffff00;
+        }
+        100% {
+          text-shadow: -1px 0 #ff00ff, 0 1px #ff00ff, 1px 0 #ff00ff, 0 -1px #ff00ff;
+        }
+      }
+	  .blurry {
+
+     /* Any browser which supports CSS3 */
+    filter: blur(3px);
+
+    /* Firefox version 34 and earlier */
+    filter: url("blur.svg#gaussian_blur");
+
+    /* Webkit in Chrome 52, Safari 9, Opera 39, and earlier */
+    -webkit-filter: blur(3px);
+}
     </style>
 	
 	<script src="https://cdn.jsdelivr.net/gh/nodeca/pako@master/dist/pako.js"></script>
@@ -233,6 +277,7 @@ header {
   "set them up, and knock them down.",
   "original!",
   "something out of a movie!",
+  "be careful with the<br>fabric of reality, garfield",
   "today's video is sponsored<br>by raid shadow legends!",
   "placeholder!",
   "I llee kemgfimh!",
@@ -243,15 +288,48 @@ header {
   "apparently,<br>line breaks work here",
   "no way? NO WAY!",
   "works in my computer!",
-  'now includes <div class="rainbow">colors!</div>'
+  'now includes <div class="rainbow">colors!</div>',
+  '<div class="blink" style="color: red;">Wake up.</div>',
+  'Awesome! Awesome! Awesome!',
+  '<div class="glitch"><marquee direction="right" scrollamount="25" behaviour="slide">BEST WEBSITE OF 20' + chance.natural({min: 10, max: 17}) + '!! XDDD!!!!!</marquee></div>',
+  "extraordinary!",
+  "no problem!",
+  "jsdhkfddsfsdjkfh<br>dkhsljajkhsdahjksad<br>djhldhsjkhdjskakhdsja<br>dsjkhsdhajksdhajksahkjdghj<br>ksdajhjhsdagjdsagjdsaghjdsa<br>dshiklshdahdsajksdhakshdaj<br>dshkjdsahgksdgahkgdsahjgsdhajggshda!",
+  "<i>!</i>",
+  "...what.",
+  "sina sitelen ala e ni kepeken toki ante!",
+  "Osu!",
+  "recommended by 99,9% of scientists!",
+  "go grab a coffee, i'll be waiting here",
+  "there is absolutely NO WAY",
+  "funny css!",
+  "im sorry",
+  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!",
+  "you're valid!",
+  "*your",
+  "*youre",
+  "*you're",
+  "small grammar mistake :enemy_trell:",
+  ":enemy_trell:",
+  "THOMAS, THE THERMONUCLEAR BOMB",
+  '<div style="color: red;">Your Mother.</div>',
+  "nice opinion, one small issue.<br>i've planted a landmine at an undisclosed<br>location inside your house. every step<br>you take is a... <i>risky</i> move."
  ]
+ splashes.push("the chance of you getting<br>this specific splash is 1/" + splashes.length + "!");
+ console.log(splashes)
  
  //splashes[Math.floor((Math.random()*splashes.length))]
  function randomSplash() {
  console.log(splashes.length-1)
- var o = chance.natural({min: 0, max: splashes.length - 1, exclude: [7]})
+ var o = chance.natural({min: 0, max: splashes.length - 1, exclude: [8]})
+ //var o = splashes.length - 2
  console.log(o)
  var i = splashes[o]
+ if (o == 18) {
+ var root = document.getElementsByTagName( 'html' )[0]; // '0' to assign the first (and only `HTML` tag)
+
+root.setAttribute( 'class', 'blurry' );
+ }
  if (i == "this specific splash will never show up! funny!") {
  console.log("hmm") 
  i = splashes[3]
