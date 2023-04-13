@@ -3,6 +3,7 @@
   <head>
     <!-- Required meta tags -->
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://theretrosimulatorstimulator.neocities.org/center.css">
@@ -350,6 +351,23 @@ root.setAttribute( 'class', 'blurry' );
  }
  window.onload = function() {
   document.getElementById("splash").innerHTML = randomSplash() 
+    // (A) TEST FETCH HEADER REQUEST TO GOOGLE ADSENSE
+  let test = new Request(
+    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+    // "https://static.ads-twitter.com/uwt.js",
+    { method: "HEAD", mode: "no-cors" }
+  );
+ 
+  // (B) FIRE THE REQEST
+  fetch(test)
+  .then(res => console.log("the ads are among us (pun intended)"))
+  .catch(err => {
+  Swal.fire(
+  'Hey, just a warning',
+  "You seem to have adblocker on. This means country selection will always be set as anonymous until you turn it off.",
+  'success'
+)
+  });
  }
 const uiscale = 1;
 let time = 0;
@@ -416,7 +434,7 @@ duration: 4000
 	function dsagydgshaadshj() {
 	
 	$.ajax({
-  url: "https://b3vk4s-3000.csb.app/doesthatevenexist/" + document.getElementById("title").value,
+  url: "https://b3vk4s-3000.csb.app/doesthatevenexist/" + encodeURIComponent(document.getElementById("title").value),
   method: "GET",
   success: function(response) {
     console.log(response);
@@ -440,23 +458,11 @@ duration: 3000
 });
 	
 	}
-	
-	function validateVanilla(str) {
-       if (str) { return "on" } else { return "off" }
-	}
-	function ajaskhddhjska() {
-	 fetch('https://ipapi.co/json')
-    .then(response => response.json())
-    .then(data => {
-	var c = data.country_code
-	if (document.getElementById("nocountry").checked) {
-	c = "nope"
-	}
-	console.log(JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: c}))
-	$.ajax({
+	function submit(c) {
+		$.ajax({
   type: "POST",
   url: "https://b3vk4s-3000.csb.app/newcodething",
-  data: JSON.stringify({title: document.getElementById("title").value, code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: c}),
+  data: JSON.stringify({title: encodeURIComponent(document.getElementById("title").value), code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: c}),
   contentType: "application/json",
   success: function(data) {
     Toastify({
@@ -469,14 +475,28 @@ text: 'Your level "' + document.getElementById("title").value + '" was submitted
 duration: 3000
 
 }).showToast();
-  },
-  error: function(jqXHR, textStatus, errorThrown) {
-    console.error(jqXHR, textStatus, errorThrown)
-  }
+	}
+	
+})
+
+}	
+	
+	function validateVanilla(str) {
+       if (str) { return "on" } else { return "off" }
+	}
+	
+	function ajaskhddhjska() {
+	if (document.getElementById("nocountry").checked) {
+	submit("nope")
+	} else {
+		 fetch('https://ipapi.co/json')
+    .then(response => response.json())
+    .then(data => {
+	var c = data.country_code
+	submit(c)
+	//console.log(JSON.stringify({title: encodeURIComponent(document.getElementById("title").value), code: document.getElementById("code").value, isvanilla: validateVanilla(document.getElementById("isvanilla").checked), country: c}))
 });
-	});
-
-
+	}
 }
 
   </script>

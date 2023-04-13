@@ -326,14 +326,14 @@ for (let key in sortedData) {
         '<a href="/monomod-browser/level?id=' +
         itemId +
         '">' +
-        item.head +
+        decodeURIComponent(item.head) +
         "</a>";
       valueCell.innerHTML =
         '<center><button onclick="' +
         "copyshit(`" +
         item.val +
         '`, `' +
-        item.head +
+        decodeURIComponent(item.head) +
         "`,)" +
         '" style="cursor: pointer;" class="copyme">Copy</button></center>';
       dateCell.innerHTML = item.date;
