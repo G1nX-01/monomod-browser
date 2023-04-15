@@ -346,7 +346,28 @@ header {
  ]
  splashes.push("the chance of you getting<br>this specific splash is 1/" + splashes.length + "!");
  console.log(splashes)
- 
+ var performance = function() {
+ console.time("response time");
+ 	fetch('https://b3vk4s-3000.csb.app/vibecheck')
+    .then(response => {
+	 if (response.ok) {
+    return response.json();
+  }
+var dt = new Date(Date.now());
+	Math.floor(console.timeEnd("response time"))
+    console.log(dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds() + " - no response... the servers are either dead or going through maintenance... - wait 30 seconds for the next performance check...")
+	  Swal.fire(
+  'Hey! Sorry for the interruption...',
+  "The servers are probably going through some maintenance. Level submission, level pages and the all page will not work while this is happening. Please wait until this is fixed.",
+  'warning'
+)
+	})
+    .then(data => {
+	var dt = new Date(Date.now());
+	Math.floor(console.timeEnd("response time"))
+	console.log(dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds() + " - servers are alive! - wait 30 seconds for the next performance check...")
+});
+ }
  //splashes[Math.floor((Math.random()*splashes.length))]
  function randomSplash() {
  console.log(splashes.length-1)
@@ -369,9 +390,8 @@ root.setAttribute( 'class', 'blurry' );
   document.getElementById("splash").innerHTML = randomSplash() 
     // (A) TEST FETCH HEADER REQUEST TO GOOGLE ADSENSE
   let test = new Request(
-    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+    "https://ipapi.co/json",
     // "https://static.ads-twitter.com/uwt.js",
-    { method: "HEAD", mode: "no-cors" }
   );
  
   // (B) FIRE THE REQEST
@@ -383,8 +403,11 @@ root.setAttribute( 'class', 'blurry' );
   "You seem to have adblocker on. This means country selection will always be set as anonymous until you turn it off.",
   'warning'
 )
-  });
+});
+    performance()
+	setInterval(performance, 30000)
  }
+ 
 const uiscale = 1;
 let time = 0;
 let stime = 0;
