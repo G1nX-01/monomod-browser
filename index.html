@@ -350,8 +350,8 @@ header {
  //splashes[Math.floor((Math.random()*splashes.length))]
  function randomSplash() {
  console.log(splashes.length-1)
- //var o = chance.natural({min: 0, max: splashes.length - 1, exclude: [8]})
- var o = splashes.length - 2
+ var o = chance.natural({min: 0, max: splashes.length - 1, exclude: [8]})
+ //var o = splashes.length - 2
  console.log(o)
  var i = splashes[o]
  if (o == 18) {
