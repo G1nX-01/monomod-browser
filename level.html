@@ -166,8 +166,8 @@ $.ajax({
   success: function(data) {
    data = data.data
    console.log(data)
-   document.getElementById("title").innerHTML = data
-   document.title = "MLB - " + data
+   document.getElementById("title").innerHTML = decodeURIComponent(data)
+   document.title = "MLB - " + decodeURIComponent(data)
    fetch('https://b3vk4s-3000.csb.app/listspecific/' + data)
   .then(response => response.json())
   .then(data => {

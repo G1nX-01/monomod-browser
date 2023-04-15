@@ -326,7 +326,23 @@ header {
   "E.",
   "this is a certified hjgghjhgj moment!",
   "hjgghjhgj!",
-  "i dont have many more ideas<br>for splash texts at this point"
+  "i dont have many more ideas<br>for splash texts at this point",
+  /*
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣤⣤⣴⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⠿⠛⠋⠉⠁⠀⠀⠀⠈⠙⠻⢷⣦⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣤⣾⡿⠋⠁⠀⣠⣶⣿⡿⢿⣷⣦⡀⠀⠀⠀⠙⠿⣦⣀⠀⠀⠀⠀
+⠀⠀⢀⣴⣿⡿⠋⠀⠀⢀⣼⣿⣿⣿⣶⣿⣾⣽⣿⡆⠀⠀⠀⠀⢻⣿⣷⣶⣄⠀
+⠀⣴⣿⣿⠋⠀⠀⠀⠀⠸⣿⣿⣿⣿⣯⣿⣿⣿⣿⣿⠀⠀⠀⠐⡄⡌⢻⣿⣿⡷
+⢸⣿⣿⠃⢂⡋⠄⠀⠀⠀⢿⣿⣿⣿⣿⣿⣯⣿⣿⠏⠀⠀⠀⠀⢦⣷⣿⠿⠛⠁
+⠀⠙⠿⢾⣤⡈⠙⠂⢤⢀⠀⠙⠿⢿⣿⣿⡿⠟⠁⠀⣀⣀⣤⣶⠟⠋⠁⠀⠀⠀
+⠀⠀⠀⠀⠈⠙⠿⣾⣠⣆⣅⣀⣠⣄⣤⣴⣶⣾⣽⢿⠿⠟⠋⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠉⠙⠛⠛⠙⠋⠉⠉⠀⠀⠀⠀⠀
+
+    You won't find anything here.⠀⠀⠀
+       -G1nX
+  */
+  "It's our little secret.<br>YmDaUIfzXn0vLJocLKUrBATjhZ91Ol4xSz==" + '<br><audio controls><source src="thisisweird.ogg" type="audio/ogg">Your browser does not support the audio element.</audio>',
+  "made by yours truly!"
  ]
  splashes.push("the chance of you getting<br>this specific splash is 1/" + splashes.length + "!");
  console.log(splashes)
@@ -334,8 +350,8 @@ header {
  //splashes[Math.floor((Math.random()*splashes.length))]
  function randomSplash() {
  console.log(splashes.length-1)
- var o = chance.natural({min: 0, max: splashes.length - 1, exclude: [8]})
- //var o = splashes.length - 2
+ //var o = chance.natural({min: 0, max: splashes.length - 1, exclude: [8]})
+ var o = splashes.length - 2
  console.log(o)
  var i = splashes[o]
  if (o == 18) {
