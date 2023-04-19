@@ -1,0 +1,223 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<script type="module" src="https://md-block.verou.me/md-block.js"></script>
+<title>MLB - Modding Guide - Start</title>
+
+    <style>
+	#splash {
+	position: relative;
+	top: -40px;
+	left: 180px;
+	font-size: 25px;
+	}
+	
+     @font-face {
+   font-family: retro;
+   src: url(nokiafc22.ttf);
+}
+@keyframes move-background {
+  from {
+    background-position: 100% 0; /* starting position */
+  }
+  to {
+    background-position: 0 0; /* ending position */
+  }
+}
+	  html {
+        font-family: retro;
+		  background: #202020;
+		  background-size: 50px 50px;
+		  background-image: url("bg.png");
+            background-repeat: repeat;
+			color: white;
+          animation: move-background 60s linear infinite;
+		      overflow-x: hidden;
+      }
+	  a {
+	  color: DarkSalmon;
+	  }
+      .button {
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.button:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+header {
+  padding: 3px;
+  background-color: grey;
+  color: white;
+  up: 100%;
+  bottom: 0;
+
+  /* And if you want the div to be full-width: */
+  left: 0;
+  right: 0;
+}
+
+.btn {
+  background: #4ad934;
+  background-image: -webkit-linear-gradient(top, #4ad934, #3b9949);
+  background-image: -moz-linear-gradient(top, #4ad934, #3b9949);
+  background-image: -ms-linear-gradient(top, #4ad934, #3b9949);
+  background-image: -o-linear-gradient(top, #4ad934, #3b9949);
+  background-image: linear-gradient(to bottom, #4ad934, #3b9949);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  color: #ffffff;
+  font-size: 23px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #55e63e;
+  background-image: -webkit-linear-gradient(top, #55e63e, #4ebd5d);
+  background-image: -moz-linear-gradient(top, #55e63e, #4ebd5d);
+  background-image: -ms-linear-gradient(top, #55e63e, #4ebd5d);
+  background-image: -o-linear-gradient(top, #55e63e, #4ebd5d);
+  background-image: linear-gradient(to bottom, #55e63e, #4ebd5d);
+  text-decoration: none;
+}
+
+.rainbow {
+   /* Chrome, Safari, Opera */
+  -webkit-animation: rainbow 5s infinite; 
+  
+  /* Internet Explorer */
+  -ms-animation: rainbow 5s infinite;
+  
+  /* Standar Syntax */
+  animation: rainbow 5s infinite; 
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+  0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+   0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+    0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+.blink {
+                animation: blinker 1.5s linear infinite;
+            }
+            @keyframes blinker {
+                50% {
+                    opacity: 0;
+                }
+            }
+   .glitch {
+        color: #fff;
+        text-shadow: -1px 0 #00ff00, 0 1px #00ff00, 1px 0 #00ff00, 0 -1px #00ff00;
+        animation: glitch 1s infinite;
+      }
+      
+      @keyframes glitch {
+        0% {
+          text-shadow: -1px 0 #ff0000, 0 1px #ff0000, 1px 0 #ff0000, 0 -1px #ff0000;
+        }
+        25% {
+          text-shadow: -1px 0 #00ff00, 0 1px #00ff00, 1px 0 #00ff00, 0 -1px #00ff00;
+        }
+        50% {
+          text-shadow: -1px 0 #0000ff, 0 1px #0000ff, 1px 0 #0000ff, 0 -1px #0000ff;
+        }
+        75% {
+          text-shadow: -1px 0 #ffff00, 0 1px #ffff00, 1px 0 #ffff00, 0 -1px #ffff00;
+        }
+        100% {
+          text-shadow: -1px 0 #ff00ff, 0 1px #ff00ff, 1px 0 #ff00ff, 0 -1px #ff00ff;
+        }
+      }
+	  .blurry {
+
+     /* Any browser which supports CSS3 */
+    filter: blur(3px);
+
+    /* Firefox version 34 and earlier */
+    filter: url("blur.svg#gaussian_blur");
+
+    /* Webkit in Chrome 52, Safari 9, Opera 39, and earlier */
+    -webkit-filter: blur(3px);
+}
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.code {
+background-color: #242424;
+}
+    </style>
+	<article class="center">
+	<h1>Step 2: Getting into the mess</h1>
+	<p>This part will be either hard or easy, depending on your coding experience.</p>
+	<p>If you don't have experience, visit <a href="https://sheepolution.com/learn/book/contents">this</a>. It's an (external) guide that<br>explains how to use LOVE2D and Lua.</p>
+	<p>Anyway, you now encounter a screen with lots of<br>weird buttons and a text editor on the center.</p>
+	<p>This is Notepad++, your coding friend that will help you code a lot.</p>
+	<p>And now is the moment to go <h2>apeshit.</h2> Do whatever you want! Change the font, the sound effects,<br>the textures... You can even replace text inside the game itself, like cell names!<br></p>
+	<p>With a lot of determination, you can even transform into the next Monomod if you want!</p>
+    <h2>Step 2.1: Compiling</h2>
+	<p>To actually apply your changes to the game, you need to run the batch file we saved earlier!</p>
+	<p>It will automatically transform your messy code into a usable .love format!</p>
+</article>
+	
