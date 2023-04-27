@@ -8,6 +8,13 @@
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <title>MLB - Loading...</title>
 <style>
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+	background-color: DarkSalmon;
+	color: white;
+}
  @font-face {
    font-family: retro;
    src: url(nokiafc22.ttf);
@@ -157,6 +164,20 @@ const urlParams = new URLSearchParams(queryString);
 console.log(urlParams)
 const ID = urlParams.get('id')
 console.log(ID)
+/**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    
+    var disqus_config = function () {
+    this.page.identifier = ID; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+   
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://mlb-levelchat.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
 //document.title = "MLB - " + urlParams.get('')
 $.ajax({
   type: "POST",
@@ -230,10 +251,9 @@ duration: 3000
 }).showToast();
 }
 </script>
-
-<!--<div id="comments">
-<h1>Comments about this level (BETA)</h1>
-<div class="commentbox"></div>
-<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
-<script>commentBox('5638535449149440-proj')</script>
-</div>-->
+<header id="footer">
+<center>
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</center>
+</header>
